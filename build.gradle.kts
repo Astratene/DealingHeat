@@ -25,6 +25,9 @@ repositories {
         name = "RyanHCode Maven"
         content { includeGroup("foundry.imguimc") }
     }
+    maven("https://repo.redlance.org/public") { // Player Animation Library
+        name = "RedlanceMinecraft"
+    }
     maven("https://api.modrinth.com/maven") { content { includeGroup("maven.modrinth") } }
     mavenLocal()
     mavenCentral()
@@ -43,6 +46,7 @@ dependencies {
     modImplementation(libs.fabric.api)
     modImplementation(libs.fabric.kotlin)
     modImplementation(libs.fzzy.config)
+    modImplementation(libs.player.animation.library)
 //    modImplementation(libs.voidlib)
     // Compatibility
     // Runtime
