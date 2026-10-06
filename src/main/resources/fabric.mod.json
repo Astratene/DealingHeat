@@ -4,29 +4,31 @@
   "version": "${mod_version}",
   "name": "${mod_name}",
   "description": "${mod_description}",
-  "authors": [ "${authors}" ],
+  "authors": [
+    "${authors}"
+  ],
   "entrypoints": {
     "main": [
       {
         "adapter": "kotlin",
-        "value": "org.teamvoided.template.Template::init"
+        "value": "org.teamvoided.dealing.heat.DealingHeat::init"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "org.teamvoided.template.client.TemplateClient::init"
+        "value": "org.teamvoided.dealing.heat.client.DealingHeatClient::init"
       }
     ]
   },
   "mixins": [
-    "template.mixins.json",
+    "dealing_heat.mixins.json",
     {
-      "config": "template.client.mixins.json",
+      "config": "dealing_heat.client.mixins.json",
       "environment": "client"
     }
   ],
-  "accessWidener": "template.classtweaker",
+  "accessWidener": "dealing_heat.classtweaker",
   "depends": {
     "java": ">=${java}",
     "minecraft": "${version_range}",
@@ -42,5 +44,5 @@
     "discord": "${discord_invite}"
   },
   "license": "${license}",
-  "icon": "assets/template/icon.png"
+  "icon": "assets/dealing_heat/icon.png"
 }

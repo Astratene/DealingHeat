@@ -1,2 +1,3 @@
-# The TeamVoided Template
-Template mod by TeamVoided
+# Dealing Heat
+
+*insert image of ender punching a boar in Valhime*
