@@ -11,7 +11,8 @@ import org.teamvoided.dealing.heat.datagen.toLangKey
 object ModDamageTypes : RegistryBootstrapper<DamageType> {
 
     override fun BootstrapContext<DamageType>.init() {
-        damage(DHDamageTypes.GAY)
+        damage(DHDamageTypes.FIREBALLED)
+        damage(DHDamageTypes.STRONG_FIREBALLED)
     }
 
     fun BootstrapContext<DamageType>.damage(
