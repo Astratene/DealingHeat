@@ -20,6 +20,12 @@ class ModEnLangProvider(var output: FabricDataOutput, p: CompletableFuture<Holde
         getModHolders(BuiltInRegistries.BLOCK).forEach {
             trySafe { gen.add(it.value(), genLang(it.key().identifier())) }
         }
+        getModHolders(BuiltInRegistries.ENTITY_TYPE).forEach {
+            trySafe { gen.add(it.value(), genLang(it.key().identifier())) }
+        }
+        getModHolders(BuiltInRegistries.ATTRIBUTE).forEach {
+            trySafe { gen.add(it.value().descriptionId, genLang(it.key().identifier())) }
+        }
 
         gen.damageType(
             DHDamageTypes.GAY,
