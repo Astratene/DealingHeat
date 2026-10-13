@@ -7,7 +7,9 @@ import net.minecraft.world.food.Foods
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.Rarity
+import net.minecraft.world.item.ToolMaterial
 import org.teamvoided.dealing.heat.DealingHeat.id
+import org.teamvoided.dealing.heat.item.Sparks
 import org.teamvoided.dealing.heat.util.getModEntries
 import org.teamvoided.dealing.heat.util.key
 import java.util.function.Function
@@ -20,6 +22,12 @@ object DHItems {
         "apple_2", ::Item, Properties()
             .rarity(Rarity.RARE)
             .food(Foods.APPLE)
+    )
+
+    val SPARKS = register(
+        "sparks", ::Sparks, Properties()
+            .rarity(Rarity.EPIC)
+            .sword(ToolMaterial.NETHERITE, 1.0F, -2.0F)
     )
 
     fun init() = Unit

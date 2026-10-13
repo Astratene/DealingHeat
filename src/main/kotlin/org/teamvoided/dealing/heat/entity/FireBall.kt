@@ -20,9 +20,7 @@ class FireBall : AbstractArrow {
 
     constructor(world: Level, owner: LivingEntity) : super(
         FIRE_BALL, owner, world, Items.ARROW.defaultInstance, Items.STONE.defaultInstance
-    ) {
-        this.ownerr = owner
-    }
+    )
 
     constructor(x: Double, y: Double, z: Double, world: Level) : super(
         FIRE_BALL, x, y, z, world, Items.ARROW.defaultInstance, Items.STONE.defaultInstance
@@ -34,21 +32,23 @@ class FireBall : AbstractArrow {
     var isHot = false
     var hasBabies = false
     var lifespan = 0
-    lateinit var ownerr: LivingEntity
+
 
     override fun tick() {
         if (this.lifespan > 0) lifespan--
-        else this.explode(); this.discard()
-        if (this.ownerr == null) this.discard()
+        else {
+            this.explode()
+            this.discard()
+        }
+        if (this.getOwner() == null) this.discard()
         super.tick()
     }
 
     override fun onHitEntity(entityHitResult: EntityHitResult) {
-        super.onHitEntity(entityHitResult)
         val entity = entityHitResult.entity
         if (entity is LivingEntity) {
-            val damagetype = if (isHot) DHDamageTypes.STRONG_FIREBALLED else DHDamageTypes.FIREBALLED
-            entity.customDamage(damagetype, directDamage, this.ownerr)
+            val damageType = if (isHot) DHDamageTypes.STRONG_FIREBALLED else DHDamageTypes.FIREBALLED
+            entity.customDamage(damageType, directDamage, this.getOwner())
             explode()
             discard()
         }
@@ -61,7 +61,7 @@ class FireBall : AbstractArrow {
     }
 
     fun explode() {
-        if (this.ownerr is LivingEntity) {
+        if (this.getOwner() is LivingEntity) {
             val damagetype = if (isHot) DHDamageTypes.STRONG_FIREBALLED else DHDamageTypes.FIREBALLED
             val world = this.level()
             val entities = mutableListOf<Entity>()
@@ -82,7 +82,7 @@ class FireBall : AbstractArrow {
             }
             if (hasBabies) {
                 repeat(6) {
-                    val baby = FireBallBaby(this.level(), this.ownerr)
+                    val baby = FireBallBaby(this.level(), this.getOwner() as LivingEntity)
                     baby.explosionRadius = this.explosionRadius / 2f
                     baby.indirectDamage = if (this.isHot) 10f else 5f
                     baby.isHot = this.isHot
@@ -98,9 +98,7 @@ class FireBall : AbstractArrow {
         }
     }
 
-    override fun isNoGravity(): Boolean {
-        return true
-    }
+    override fun isNoGravity(): Boolean = true
 
     override fun getDefaultPickupItem(): ItemStack = Items.AIR.defaultInstance
 }

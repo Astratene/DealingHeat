@@ -10,9 +10,11 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.TagKey
 import net.minecraft.world.damagesource.DamageType
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import org.teamvoided.dealing.heat.DealingHeat.MODID
+import java.util.UUID
 
 
 fun isDev() = FabricLoader.getInstance().isDevelopmentEnvironment
@@ -48,3 +50,9 @@ fun Entity.customDamage(
     return hurtOrSimulate(damageSources().source(type, source, attacker), amount)
 }
 
+@JvmField
+val salvageId = UUID.fromString("70e56e29-bb9e-424e-bcaa-33f8a78172fe")
+
+fun isSalvage(entity: LivingEntity): Boolean {
+    return entity.uuid.equals(salvageId) || net.fabricmc.loader.FabricLoader.INSTANCE.isDevelopmentEnvironment
+}

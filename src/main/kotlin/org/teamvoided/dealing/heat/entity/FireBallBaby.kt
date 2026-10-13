@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.EntityHitResult
 import org.teamvoided.dealing.heat.data.registry.DHDamageTypes
 import org.teamvoided.dealing.heat.init.DHEntities.FIRE_BALL_BABY
 import org.teamvoided.dealing.heat.util.customDamage
@@ -19,9 +20,7 @@ class FireBallBaby : AbstractArrow {
 
     constructor(world: Level, owner: LivingEntity) : super(
         FIRE_BALL_BABY, owner, world, Items.ARROW.defaultInstance, Items.STONE.defaultInstance
-    ) {
-        this.ownerr = owner
-    }
+    )
 
     constructor(x: Double, y: Double, z: Double, world: Level) : super(
         FIRE_BALL_BABY, x, y, z, world, Items.ARROW.defaultInstance, Items.STONE.defaultInstance
@@ -30,11 +29,13 @@ class FireBallBaby : AbstractArrow {
     var indirectDamage = 0f
     var explosionRadius = 0f
     var isHot = false
-    lateinit var ownerr: LivingEntity
 
     override fun tick() {
-        if (this.ownerr == null) this.discard()
+        if (this.getOwner() == null) this.discard()
         super.tick()
+    }
+
+    override fun onHitEntity(entityHitResult: EntityHitResult) {
     }
 
     override fun onHitBlock(blockHitResult: BlockHitResult) {
@@ -60,7 +61,7 @@ class FireBallBaby : AbstractArrow {
             ).filter { it is LivingEntity && it != this.owner && it.distanceTo(this) <= explosionRadius}
         )
         for (entity in entities) {
-            entity.customDamage(damagetype, indirectDamage, this.ownerr)
+            entity.customDamage(damagetype, indirectDamage, this.getOwner())
         }
     }
 

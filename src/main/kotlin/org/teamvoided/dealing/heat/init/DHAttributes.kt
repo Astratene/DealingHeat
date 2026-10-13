@@ -10,6 +10,7 @@ import java.util.function.Function
 
 object DHAttributes {
 
+    @JvmField
     val MAX_HEAT = register("max_heat") { RangedAttribute(it, 0.0, 0.0, 256.0).setSyncable(true) }
 
     fun init() = Unit

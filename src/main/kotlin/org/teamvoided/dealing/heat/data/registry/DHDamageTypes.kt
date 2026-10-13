@@ -15,6 +15,9 @@ object DHDamageTypes {
     val FIREWALL = key("firewall")
     val STRONG_FIREWALL = key("strong_firewall")
 
+    val SPARK_BURNED = key("spark_burned")
+    val SPARK_BURNED_HOT = key("spark_burned_hot")
+
     fun key(id: String) = Registries.DAMAGE_TYPE.key(id(id))
 
 }
