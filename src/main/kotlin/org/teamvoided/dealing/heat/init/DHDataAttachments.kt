@@ -7,6 +7,9 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentType
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.world.entity.LivingEntity
 import org.teamvoided.dealing.heat.DealingHeat.id
+import org.teamvoided.dealing.heat.data.registry.DHDamageTypes
+import org.teamvoided.dealing.heat.util.customDamage
+import org.teamvoided.dealing.heat.util.isSalvage
 import java.util.function.Consumer
 
 @Suppress("UnstableApiUsage")
@@ -35,15 +38,19 @@ object DHDataAttachments {
     }
 
     // region Helpers
+    @JvmStatic
     fun LivingEntity.getHeat(): Int = getAttachedOrElse(HEAT, 0)
     fun LivingEntity.setHeat(value: Int) = setAttached(HEAT, value)
+    @JvmStatic
     fun LivingEntity.addHeat(value: Int) {
         if (getHeat() + value <= this.attributes.getValue(DHAttributes.MAX_HEAT)) {
             this.setHeat(this.getHeat() + value)
         }
         else {
             this.setHeat(this.attributes.getValue(DHAttributes.MAX_HEAT).toInt())
-            // todo salvage take damage here if thingy
+            if(isSalvage(this)) {
+                customDamage(DHDamageTypes.SALVAGE_BURN, 1f)
+            }
         }
         if (value > 0) {
             this.setHeatCooldown(60)

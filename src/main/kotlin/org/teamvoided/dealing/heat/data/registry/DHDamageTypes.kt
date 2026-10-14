@@ -18,6 +18,8 @@ object DHDamageTypes {
     val SPARK_BURNED = key("spark_burned")
     val SPARK_BURNED_HOT = key("spark_burned_hot")
 
+    val SALVAGE_BURN = key("salvage_burn")
+
     fun key(id: String) = Registries.DAMAGE_TYPE.key(id(id))
 
 }

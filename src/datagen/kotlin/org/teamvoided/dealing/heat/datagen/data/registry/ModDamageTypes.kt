@@ -13,6 +13,7 @@ object ModDamageTypes : RegistryBootstrapper<DamageType> {
     override fun BootstrapContext<DamageType>.init() {
         damage(DHDamageTypes.FIREBALLED)
         damage(DHDamageTypes.STRONG_FIREBALLED)
+        damage(DHDamageTypes.SALVAGE_BURN)
     }
 
     fun BootstrapContext<DamageType>.damage(

@@ -33,6 +33,13 @@ class ModEnLangProvider(var output: FabricDataOutput, p: CompletableFuture<Holde
             "contracted gay from",
             "contracted gay from" to "via means of"
         )
+
+        gen.damageType(
+            DHDamageTypes.SALVAGE_BURN,
+            "burned up",
+            "burned up while fighting",
+            "burned up while fighting" to "using"
+        )
     }
 
     fun genLang(id: Identifier): String {
