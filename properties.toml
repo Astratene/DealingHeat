@@ -7,4 +7,4 @@ github_repo = "Astratene/DealingHeat"
 discord_invite = "https://discord.gg/KZ5Q364hEg"
 authors = [ "TheHomopohbicCores" ]
 license = "MIT"
-version_range = ">=1.21.11 <26.1"
+version_range = ">=1.21.1 <1.21.2"

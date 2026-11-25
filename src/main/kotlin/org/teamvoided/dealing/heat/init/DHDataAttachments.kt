@@ -50,6 +50,7 @@ object DHDataAttachments {
             this.setHeat(this.attributes.getValue(DHAttributes.MAX_HEAT).toInt())
             if(isSalvage(this)) {
                 customDamage(DHDamageTypes.SALVAGE_BURN, 1f)
+
             }
         }
         if (value > 0) {

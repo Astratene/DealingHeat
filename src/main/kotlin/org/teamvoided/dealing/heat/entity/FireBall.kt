@@ -98,7 +98,7 @@ class FireBall : AbstractArrow {
         }
     }
 
-    override fun isNoGravity(): Boolean = true
+    override fun isNoGravity(): Boolean = false
 
     override fun getDefaultPickupItem(): ItemStack = Items.AIR.defaultInstance
 }
