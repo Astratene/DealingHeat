@@ -7,7 +7,7 @@ import net.minecraft.world.food.Foods
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.Rarity
-import net.minecraft.world.item.ToolMaterial
+import net.minecraft.world.item.Tiers
 import org.teamvoided.dealing.heat.DealingHeat.id
 import org.teamvoided.dealing.heat.item.Sparks
 import org.teamvoided.dealing.heat.util.getModEntries
@@ -27,15 +27,14 @@ object DHItems {
     val SPARKS = register(
         "sparks", ::Sparks, Properties()
             .rarity(Rarity.EPIC)
-            .sword(ToolMaterial.NETHERITE, 1.0F, -2.0F)
+            .attributes(Sparks.createAttributes(Tiers.NETHERITE, 1.0f, -2F))
     )
 
     fun init() = Unit
 
     fun register(name: String, item: Function<Properties, Item>, properties: Properties = Properties()): Item {
         val id = Registries.ITEM.key(id(name))
-        properties.setId(id) // 1.21.11 code
-        return Registry.register(BuiltInRegistries.ITEM, id.identifier(), item.apply(properties))
+        return Registry.register(BuiltInRegistries.ITEM, id.registry(), item.apply(properties))
     }
 
 }

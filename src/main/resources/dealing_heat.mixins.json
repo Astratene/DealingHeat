@@ -4,7 +4,6 @@
   "package": "org.teamvoided.dealing.heat.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ExampleServerMixin",
     "LivingEntityMixin",
     "PlayerMixin"
   ],

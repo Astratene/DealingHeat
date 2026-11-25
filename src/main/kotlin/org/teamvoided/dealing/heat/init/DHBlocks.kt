@@ -30,8 +30,8 @@ object DHBlocks {
 
     fun <T : Block> registerNoItem(name: String, block: Function<Properties, T>, properties: Properties): T {
         val id = Registries.BLOCK.key(id(name))
-        properties.setId(id) // 1.21.11 code
-        return BuiltInRegistries.BLOCK.register(id.identifier(), block.apply(properties))
+        //properties.setId(id) // 1.21.11 code
+        return BuiltInRegistries.BLOCK.register(id.registry(), block.apply(properties))
     }
 
 }

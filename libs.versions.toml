@@ -11,6 +11,7 @@
     fabric_kotlin = "1.14.2+kotlin.2.4.21"
     fzzy_config = "0.7.7+1.21"
     voidlib = "0.1.0-alpha.2"
+    player_animation_library = "1.1.6+mc.1.21.1"
     # Compatibility
     # Runtime
     modmenu = "11.0.5"

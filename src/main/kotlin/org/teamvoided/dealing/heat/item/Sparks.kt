@@ -1,13 +1,19 @@
 package org.teamvoided.dealing.heat.item
 
+import net.minecraft.world.entity.EquipmentSlotGroup
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.Item
+import net.minecraft.world.entity.ai.attributes.AttributeModifier
+import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Tier
+import net.minecraft.world.item.TieredItem
+import net.minecraft.world.item.Tiers
+import net.minecraft.world.item.component.ItemAttributeModifiers
 import org.teamvoided.dealing.heat.data.registry.DHDamageTypes
 import org.teamvoided.dealing.heat.init.DHDataAttachments.getHeat
 import org.teamvoided.dealing.heat.util.customDamage
 
-class Sparks(settings: Properties) : Item(settings) {
+class Sparks(settings: Properties) : TieredItem(Tiers.NETHERITE, settings) {
 
     override fun postHurtEnemy(itemStack: ItemStack, target: LivingEntity, user: LivingEntity) {
         super.postHurtEnemy(itemStack, target, user)
@@ -25,14 +31,34 @@ class Sparks(settings: Properties) : Item(settings) {
         if (userHeat >= 500) {
             target.igniteForSeconds(2f)
         }
-        if(userHeat >= 1500) {
+        if (userHeat >= 1500) {
             //todo add the short range flame projectile, and move this to an "on swing" function
         }
-        if(userHeat >= 1750) {
+        if (userHeat >= 1750) {
             //todo add the small flame explosion
         }
         //And then adding heat to the user.
 
     }
 
+
+    companion object {
+        fun createAttributes(
+            material: Tier,
+            baseAttackDamageModifier: Float,
+            attackSpeedModifier: Float,
+        ): ItemAttributeModifiers {
+            return ItemAttributeModifiers.builder().add(
+                Attributes.ATTACK_DAMAGE, AttributeModifier(
+                    BASE_ATTACK_DAMAGE_ID,
+                    (baseAttackDamageModifier + material.attackDamageBonus).toDouble(),
+                    AttributeModifier.Operation.ADD_VALUE
+                ), EquipmentSlotGroup.MAINHAND
+            ).add(
+                Attributes.ATTACK_SPEED, AttributeModifier(
+                    BASE_ATTACK_SPEED_ID, attackSpeedModifier.toDouble(), AttributeModifier.Operation.ADD_VALUE
+                ), EquipmentSlotGroup.MAINHAND
+            ).build()
+        }
+    }
 }
